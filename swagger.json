@@ -1,0 +1,95 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Blagues Carambar",
+    "description": "Une API qui permet de gérer et récupérer des blagues aléatoires.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Serveur Local"
+    }
+  ],
+  "paths": {
+    "/blagues": {
+      "get": {
+        "summary": "Récupérer toutes les blagues",
+        "responses": {
+          "200": {
+            "description": "Liste de toutes les blagues",
+            "content": {
+              "application/json": {
+                "example": [
+                  { "id": 1, "content": "Pourquoi le football c'est rigolo ? Parce que Thierry en rit" },
+                  { "id": 2, "content": "Quel est le comble pour un marin ? Avoir le nez qui coule" }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Ajouter une nouvelle blague",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": { "content": "Quel est le sport le plus silencieux ? Le para-chuuuut" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Blague ajoutée",
+            "content": {
+              "application/json": {
+                "example": { "id": 3, "content": "Quel est le sport le plus silencieux ? Le para-chuuuut" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blagues/{id}": {
+      "get": {
+        "summary": "Récupérer une blague par ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID de la blague",
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détails de la blague",
+            "content": {
+              "application/json": {
+                "example": { "id": 1, "content": "Pourquoi le football c'est rigolo ? Parce que Thierry en rit" }
+              }
+            }
+          },
+          "404": { "description": "Blague non trouvée" }
+        }
+      }
+    },
+    "/blagues/random": {
+      "get": {
+        "summary": "Récupérer une blague aléatoire",
+        "responses": {
+          "200": {
+            "description": "Une blague aléatoire",
+            "content": {
+              "application/json": {
+                "example": { "id": 2, "content": "Quel est le comble pour un marin ? Avoir le nez qui coule" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
