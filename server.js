@@ -32,6 +32,23 @@ const Joke = sequelize.define('Joke', {
 // Synchronisation de la base de données
 sequelize.sync();
 
+async function seedDatabase() {
+    const count = await Joke.count();
+    if (count === 0) {
+        await Joke.bulkCreate([
+            { content: "Pourquoi le football c'est rigolo ? Parce que Thierry en rit" },
+            { content: "Que fait une fraise sur un cheval ? Tagada tagada." },
+            { content: "Pourquoi les squelettes ne se battent jamais entre eux ? Parce qu'ils n'ont pas de tripes." },
+            { content: "Quel est l’animal le plus rapide du monde ? Le pou, car il est toujours en tête." },
+            { content: "Pourquoi les chats n’aiment-ils pas l’eau ? Parce que dans l’eau, minet coule." }
+        ]);
+        console.log("Blagues ajoutées à la base de données !");
+    }
+}
+
+seedDatabase();
+
+
 // Endpoint pour récupérer une blague aléatoire
 app.get('/blagues/random', async (req, res) => {
     const jokes = await Joke.findAll();
