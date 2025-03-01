@@ -45,6 +45,16 @@ app.get('/blagues/random', async (req, res) => {
     res.json(randomJoke);
 });
 
+app.get('/blagues', async (req, res) => {
+    try {
+        const jokes = await Joke.findAll();
+        res.json(jokes);
+    } catch (error) {
+        console.error("Erreur lors de la récupération des blagues :", error);
+        res.status(500).json({ error: "Erreur serveur" });
+    }
+});
+
 // Démarrer le serveur
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
