@@ -10,7 +10,7 @@ app.use(express.json());
 
 // ✅ Activation de CORS avec des paramètres pour autoriser toutes les origines
 app.use(cors({
-    origin: 'https://steph93130.github.iotest-simplon-front/', // Autorise toutes les origines
+    origin: 'https://steph93130.github.io/', // Autorise toutes les origines
     methods: ['GET', 'POST'], // Autorise seulement les requêtes GET et POST
     allowedHeaders: ['Content-Type']
 }));
